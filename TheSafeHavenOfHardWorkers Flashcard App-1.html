@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheSafeHavenOfHardWorkers - Daily Objectives</title>
+    <!-- Web App Manifest for PWA / APK Conversion -->
+    <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22TheSafeHavenOfHardWorkers%22%2C%22short_name%22%3A%22SafeHaven%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2308090d%22%2C%22theme_color%22%3A%22%234285f4%22%7D">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gemini: {
+                            bg: '#08090d',
+                            card: 'rgba(21, 23, 35, 0.7)',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            blue: '#4285f4',
+                            purple: '#9b51e0',
+                            cyan: '#00d2ff',
+                            magenta: '#e052a0',
+                            accent: '#8ab4f8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 4s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { opacity: '0.3', transform: 'scale(0.98)' },
+                            '100%': { opacity: '0.6', transform: 'scale(1.02)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Ambient & Card Styling */
+        body {
+            background-color: #08090d;
+            color: #f1f3f4;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gemini-gradient-text {
+            background: linear-gradient(135deg, #4285f4 0%, #9b51e0 45%, #00d2ff 80%, #e052a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gemini-gradient-bg {
+            background: linear-gradient(135deg, #4285f4 0%, #9b51e0 50%, #00d2ff 100%);
+        }
+
+        .gemini-gradient-border {
+            position: relative;
+            background: rgba(18, 20, 32, 0.85);
+            backdrop-filter: blur(16px);
+            border-radius: 1.25rem;
+        }
+
+        .gemini-gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 1.3rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.5), rgba(155, 81, 224, 0.3), rgba(0, 210, 255, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* 3D Flip Card Animation */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #4285f4, #9b51e0, #00d2ff);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -7px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gemini-purple selection:text-white">
+
+    <!-- Ambient Glowing Background Stars/Lights -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 max-w-4xl mx-auto w-full px-4 py-6 flex-grow flex flex-col">
+
+        <!-- Top Navigation / Header -->
+        <header class="flex items-center justify-between py-4 mb-6 border-b border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 shadow-lg shadow-blue-500/10">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-gemini-cyan"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight gemini-gradient-text">TheSafeHavenOfHardWorkers</h1>
+                    <p class="text-xs text-gray-400">Daily Objective Flashcards</p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center gap-2">
+                <button id="notificationToggleBtn" onclick="toggleNotifications()" class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-300 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+                    <span id="notifBtnText" class="hidden sm:inline">Enable Notifications</span>
+                </button>
+                <button onclick="resetDayState()" class="p-2 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 transition" title="Reset Day Cycle">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Timer & Status Bar -->
+        <div id="statusHeader" class="gemini-gradient-border p-4 mb-8 hidden">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                    <div>
+                        <div id="dayStatusLabel" class="text-xs uppercase font-semibold tracking-wider text-gemini-accent">Haven Active</div>
+                        <div id="startTimeText" class="text-xs text-gray-400">Started at: --:--</div>
+                    </div>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-xs text-gray-400">Evening Review in</div>
+                        <div id="countdownTimer" class="font-mono text-lg font-bold text-white tracking-widest">12:00:00</div>
+                    </div>
+                    <button id="triggerEveningBtn" onclick="forceEveningMode()" class="px-3 py-1.5 text-xs rounded-lg bg-gemini-purple/20 border border-gemini-purple/50 text-gemini-cyan hover:bg-gemini-purple/30 transition">
+                        Jump to Review
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dynamic View Area -->
+        <main class="flex-grow flex flex-col justify-center">
+
+            <!-- 1. SETUP / OBJECTIVES MANAGER VIEW -->
+            <section id="setupView" class="space-y-6">
+                <div class="text-center max-w-lg mx-auto mb-6">
+                    <span class="px-3 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-blue-500/10 border border-blue-500/30 text-gemini-accent">
+                        Welcome to TheSafeHavenOfHardWorkers
+                    </span>
+                    <h2 class="text-2xl font-bold text-white mt-3 mb-2">Set Your Hard Work Objectives</h2>
+                    <p class="text-sm text-gray-400">Define what you will conquer today. Walk through them as morning flashcards, then reflect 12 hours later.</p>
+                </div>
+
+                <!-- Objectives Form -->
+                <div class="gemini-gradient-border p-6 shadow-2xl">
+                    <h3 class="text-sm font-semibold text-gray-300 mb-4 flex items-center gap-2">
+                        <i data-lucide="plus-circle" class="w-4 h-4 text-gemini-blue"></i>
+                        Add Haven Objective
+                    </h3>
+                    <form id="addObjectiveForm" onsubmit="handleAddObjective(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">Objective Title</label>
+                            <input type="text" id="objTitle" required placeholder="e.g., Deep Coding 4 Hours, Read 30 pages, Run 5km..." class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-gemini-blue text-sm transition">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <label class="relative flex flex-col p-3 rounded-xl bg-black/30 border border-white/10 cursor-pointer hover:border-gemini-blue/50 transition">
+                                <input type="radio" name="objType" value="number" checked onclick="toggleTypeInputs('number')" class="sr-only peer">
+                                <div class="flex items-center gap-2 mb-1 peer-checked:text-gemini-cyan text-gray-300 font-medium text-xs">
+                                    <i data-lucide="hash" class="w-4 h-4"></i> Numeric Goal
+                                </div>
+                                <span class="text-[10px] text-gray-500">Track quantities (e.g. 50 pushups, 4 hours)</span>
+                            </label>
+
+                            <label class="relative flex flex-col p-3 rounded-xl bg-black/30 border border-white/10 cursor-pointer hover:border-gemini-blue/50 transition">
+                                <input type="radio" name="objType" value="boolean" onclick="toggleTypeInputs('boolean')" class="sr-only peer">
+                                <div class="flex items-center gap-2 mb-1 peer-checked:text-gemini-cyan text-gray-300 font-medium text-xs">
+                                    <i data-lucide="check-square" class="w-4 h-4"></i> Simple Yes/No
+                                </div>
+                                <span class="text-[10px] text-gray-500">Binary accomplishment (e.g. Cold Shower)</span>
+                            </label>
+
+                            <label class="relative flex flex-col p-3 rounded-xl bg-black/30 border border-white/10 cursor-pointer hover:border-gemini-blue/50 transition">
+                                <input type="radio" name="objType" value="life" onclick="toggleTypeInputs('life')" class="sr-only peer">
+                                <div class="flex items-center gap-2 mb-1 peer-checked:text-gemini-cyan text-gray-300 font-medium text-xs">
+                                    <i data-lucide="heart" class="w-4 h-4"></i> Meaningful Life Goal
+                                </div>
+                                <span class="text-[10px] text-gray-500">Yes/No status + 1-10 quality scale</span>
+                            </label>
+                        </div>
+
+                        <!-- Specific Inputs depending on type -->
+                        <div id="targetNumberInputContainer" class="block">
+                            <label class="block text-xs text-gray-400 mb-1">Target Quantity & Unit</label>
+                            <div class="flex gap-2">
+                                <input type="number" id="objTarget" min="1" value="10" placeholder="Target e.g. 10" class="w-1/2 px-4 py-2 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-gemini-blue">
+                                <input type="text" id="objUnit" placeholder="Unit e.g., pages, mins, reps" class="w-1/2 px-4 py-2 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-gemini-blue">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-2.5 rounded-xl gemini-gradient-bg text-white font-medium text-sm shadow-lg shadow-blue-500/20 hover:opacity-95 transition">
+                            Add Objective
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Current Objective List -->
+                <div class="space-y-3">
+                    <h3 class="text-xs uppercase tracking-wider text-gray-400 font-semibold px-1">Today's Active Work Objectives (<span id="objectiveCount">0</span>)</h3>
+                    <div id="objectivesList" class="space-y-2">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Start Day Trigger -->
+                <div class="pt-4 flex justify-center">
+                    <button id="startDayBtn" onclick="startMorningReview()" disabled class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-white/10 border border-white/10 text-gray-500 font-semibold text-base transition flex items-center justify-center gap-3">
+                        <i data-lucide="sun" class="w-5 h-5"></i>
+                        <span>Start Workday & Morning Flashcards</span>
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- 2. MORNING FLASHCARD REVIEW VIEW -->
+            <section id="morningView" class="hidden space-y-6 max-w-lg mx-auto w-full">
+                <div class="text-center">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 border border-amber-500/30 text-amber-300">
+                        Morning Briefing
+                    </span>
+                    <h2 class="text-2xl font-bold text-white mt-2">Morning Haven Briefing</h2>
+                    <p class="text-xs text-gray-400 mt-1">Flip each card to visualize your work and prime your focus.</p>
+                </div>
+
+                <!-- Flashcard Container -->
+                <div class="relative w-full h-80 perspective-1000">
+                    <div id="morningCard" onclick="flipCard('morningCard')" class="relative w-full h-full transform-style-3d cursor-pointer">
+                        
+                        <!-- Front of Card -->
+                        <div class="absolute inset-0 w-full h-full gemini-gradient-border p-8 flex flex-col justify-between backface-hidden shadow-2xl">
+                            <div class="flex justify-between items-start">
+                                <span id="morningCardTypeBadge" class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-md bg-white/10 text-gemini-cyan border border-white/10">Type</span>
+                                <span id="morningCardIndex" class="text-xs font-mono text-gray-400">1 of 3</span>
+                            </div>
+                            <div class="my-auto text-center">
+                                <i id="morningCardIcon" data-lucide="target" class="w-12 h-12 text-gemini-accent mx-auto mb-4 animate-float"></i>
+                                <h3 id="morningCardTitle" class="text-2xl font-bold text-white mb-2">Objective Title</h3>
+                                <p id="morningCardDetails" class="text-sm text-gray-300">Target details here</p>
+                            </div>
+                            <div class="text-center text-xs text-gray-500 flex items-center justify-center gap-1">
+                                <i data-lucide="rotate-3d" class="w-3.5 h-3.5"></i> Tap card to flip for reflection
+                            </div>
+                        </div>
+
+                        <!-- Back of Card -->
+                        <div class="absolute inset-0 w-full h-full gemini-gradient-border p-8 flex flex-col justify-between backface-hidden rotate-y-180 shadow-2xl bg-slate-950/90">
+                            <div class="text-xs text-gemini-cyan font-semibold uppercase tracking-wider">Focus Mindset</div>
+                            <div class="my-auto text-center space-y-3">
+                                <i data-lucide="compass" class="w-10 h-10 text-gemini-purple mx-auto"></i>
+                                <p id="morningCardPrompt" class="text-base font-medium text-gray-200">"Why is executing this objective essential for your growth today?"</p>
+                            </div>
+                            <div class="text-center text-xs text-gray-500">Tap to turn back</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Flashcard Navigation -->
+                <div class="flex items-center justify-between gap-4">
+                    <button onclick="navigateMorningCard(-1)" id="prevMorningBtn" class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition flex items-center gap-1">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i> Prev
+                    </button>
+                    <div class="flex gap-1.5" id="morningDots">
+                        <!-- Dots populated JS -->
+                    </div>
+                    <button onclick="navigateMorningCard(1)" id="nextMorningBtn" class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition flex items-center gap-1">
+                        Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="pt-2 text-center">
+                    <button onclick="finishMorningReview()" class="w-full py-3 rounded-xl gemini-gradient-bg font-semibold text-sm shadow-lg shadow-blue-500/20 hover:opacity-90 transition">
+                        Lock In Objectives & Start 12-Hour Timer
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- 3. EVENING FLASHCARD REVIEW VIEW -->
+            <section id="eveningView" class="hidden space-y-6 max-w-lg mx-auto w-full">
+                <div class="text-center">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 border border-purple-500/30 text-gemini-cyan">
+                        12-Hour Haven Review
+                    </span>
+                    <h2 class="text-2xl font-bold text-white mt-2">Evening Flashcard Check-In</h2>
+                    <p class="text-xs text-gray-400 mt-1">Review your results one objective at a time.</p>
+                </div>
+
+                <!-- Interactive Review Flashcard -->
+                <div class="gemini-gradient-border p-6 sm:p-8 shadow-2xl relative min-h-[360px] flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span id="eveningCardTypeBadge" class="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-md bg-white/10 text-gemini-cyan border border-white/10">Goal Type</span>
+                            <span id="eveningCardIndex" class="text-xs font-mono text-gray-400">1 of 3</span>
+                        </div>
+
+                        <h3 id="eveningCardTitle" class="text-2xl font-bold text-white mb-1">Objective Title</h3>
+                        <p id="eveningCardTargetDesc" class="text-sm text-gray-400 mb-6">Target details</p>
+
+                        <!-- DYNAMIC INPUT AREA DEPENDING ON TYPE -->
+                        <div id="eveningInputContainer" class="py-2">
+                            <!-- Injected dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Evening Card Actions -->
+                    <div class="flex items-center justify-between gap-3 pt-6 border-t border-white/10 mt-6">
+                        <button onclick="navigateEveningCard(-1)" id="prevEveningBtn" class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium hover:bg-white/10 transition">
+                            Back
+                        </button>
+                        <button onclick="saveEveningCardAndNext()" id="nextEveningBtn" class="px-6 py-2.5 rounded-xl gemini-gradient-bg text-xs font-semibold hover:opacity-90 transition shadow-lg shadow-purple-500/20">
+                            Save & Next
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 4. SUMMARY / DAY COMPLETE VIEW -->
+            <section id="summaryView" class="hidden space-y-6 max-w-xl mx-auto w-full text-center">
+                <div class="gemini-gradient-border p-8 shadow-2xl space-y-6">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gemini-cyan/10 border border-gemini-cyan/30 flex items-center justify-center text-gemini-cyan shadow-lg shadow-cyan-500/20">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-white">Daily Hard Work Complete!</h2>
+                        <p class="text-sm text-gray-400 mt-1">Here is your achievement breakdown for today.</p>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-2 gap-4 text-left">
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10">
+                            <div class="text-xs text-gray-400">Total Objectives</div>
+                            <div id="summaryTotal" class="text-2xl font-bold text-white mt-1">0</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10">
+                            <div class="text-xs text-gray-400">Completed</div>
+                            <div id="summaryCompleted" class="text-2xl font-bold text-gemini-cyan mt-1">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Breakdown List -->
+                    <div class="space-y-3 text-left">
+                        <h4 class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Haven Performance Summary</h4>
+                        <div id="summaryList" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <button onclick="resetDayState()" class="w-full py-3 rounded-xl bg-white/10 border border-white/10 hover:bg-white/20 text-white font-medium text-sm transition">
+                        Start Fresh Day
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-8 py-4 text-center text-xs text-gray-600 border-t border-white/5">
+            TheSafeHavenOfHardWorkers &bull; Purpose-Driven Daily Flashcards
+        </footer>
+    </div>
+
+    <!-- Notification Alert Toast -->
+    <div id="notificationToast" class="fixed bottom-6 right-6 max-w-sm w-full gemini-gradient-border p-4 shadow-2xl transform translate-y-32 transition-transform duration-300 z-50 flex items-start gap-3">
+        <div class="p-2 bg-gemini-blue/20 rounded-lg text-gemini-cyan">
+            <i data-lucide="bell-ring" class="w-5 h-5"></i>
+        </div>
+        <div class="flex-grow">
+            <h4 class="text-sm font-semibold text-white">12 Hours Completed!</h4>
+            <p class="text-xs text-gray-300 mt-0.5">Time for your evening objective review flashcards at TheSafeHavenOfHardWorkers.</p>
+            <button onclick="forceEveningMode(); hideToast()" class="mt-2 text-xs text-gemini-cyan font-semibold hover:underline">
+                Start Review Now &rarr;
+            </button>
+        </div>
+        <button onclick="hideToast()" class="text-gray-500 hover:text-white">
+            <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        // State Management
+        let objectives = [];
+        let dayStartTime = null;
+        let activeView = 'setup'; // 'setup', 'morning', 'evening', 'summary'
+        let currentMorningIndex = 0;
+        let currentEveningIndex = 0;
+        let timerInterval = null;
+        let notificationPermission = false;
+
+        const TWELVE_HOURS_MS = 12 * 60 * 60 * 1000;
+
+        // Initialize Application
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            lucide.createIcons();
+            checkNotificationPermission();
+            updateUI();
+        });
+
+        // Save State to LocalStorage
+        function saveState() {
+            const data = {
+                objectives,
+                dayStartTime,
+                activeView
+            };
+            localStorage.setItem('safehaven_hardworkers_data', JSON.stringify(data));
+        }
+
+        // Load State from LocalStorage
+        function loadState() {
+            const saved = localStorage.getItem('safehaven_hardworkers_data');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    objectives = parsed.objectives || [];
+                    dayStartTime = parsed.dayStartTime || null;
+                    activeView = parsed.activeView || 'setup';
+                } catch (e) {
+                    console.error('Error loading saved state:', e);
+                }
+            }
+
+            if (dayStartTime) {
+                startTimer();
+            }
+        }
+
+        // Handle Type Radio Switch In Form
+        function toggleTypeInputs(type) {
+            const numContainer = document.getElementById('targetNumberInputContainer');
+            if (type === 'number') {
+                numContainer.classList.remove('hidden');
+            } else {
+                numContainer.classList.add('hidden');
+            }
+        }
+
+        // Add Objective Event Handler
+        function handleAddObjective(e) {
+            e.preventDefault();
+            const titleInput = document.getElementById('objTitle');
+            const typeInput = document.querySelector('input[name="objType"]:checked').value;
+            const targetInput = document.getElementById('objTarget');
+            const unitInput = document.getElementById('objUnit');
+
+            const newObj = {
+                id: Date.now().toString(),
+                title: titleInput.value.trim(),
+                type: typeInput, // 'number', 'boolean', 'life'
+                targetNumber: typeInput === 'number' ? parseInt(targetInput.value) || 1 : null,
+                unit: typeInput === 'number' ? (unitInput.value.trim() || 'units') : '',
+                // Evening responses:
+                completed: false,
+                loggedNumber: 0,
+                ratingScore: 5
+            };
+
+            objectives.push(newObj);
+            titleInput.value = '';
+            
+            saveState();
+            renderObjectivesList();
+            updateStartButtonState();
+            lucide.createIcons();
+        }
+
+        // Delete Objective
+        function deleteObjective(id) {
+            objectives = objectives.filter(o => o.id !== id);
+            saveState();
+            renderObjectivesList();
+            updateStartButtonState();
+        }
+
+        // Render Setup Objectives List
+        function renderObjectivesList() {
+            const listEl = document.getElementById('objectivesList');
+            const countEl = document.getElementById('objectiveCount');
+            countEl.textContent = objectives.length;
+
+            if (objectives.length === 0) {
+                listEl.innerHTML = `
+                    <div class="p-6 text-center text-xs text-gray-500 rounded-xl bg-black/20 border border-white/5">
+                        No work objectives added yet. Create at least one objective to enter the Haven!
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = objectives.map(obj => {
+                let badgeLabel = '';
+                let badgeColor = '';
+                if (obj.type === 'number') {
+                    badgeLabel = `${obj.targetNumber} ${obj.unit}`;
+                    badgeColor = 'bg-blue-500/10 text-blue-400 border-blue-500/20';
+                } else if (obj.type === 'boolean') {
+                    badgeLabel = 'Yes / No';
+                    badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
+                } else {
+                    badgeLabel = 'Life Goal (1-10)';
+                    badgeColor = 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+                }
+
+                return `
+                    <div class="p-3.5 rounded-xl bg-black/30 border border-white/10 flex items-center justify-between hover:border-white/20 transition">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2.5 py-1 rounded-md border font-mono ${badgeColor}">${badgeLabel}</span>
+                            <span class="text-sm text-gray-200 font-medium">${escapeHtml(obj.title)}</span>
+                        </div>
+                        <button onclick="deleteObjective('${obj.id}')" class="p-1.5 text-gray-500 hover:text-red-400 rounded-lg hover:bg-white/5 transition">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateStartButtonState() {
+            const startBtn = document.getElementById('startDayBtn');
+            if (objectives.length > 0) {
+                startBtn.disabled = false;
+                startBtn.className = "w-full sm:w-auto px-8 py-3.5 rounded-2xl gemini-gradient-bg text-white font-semibold text-base transition shadow-lg shadow-blue-500/25 hover:opacity-95 flex items-center justify-center gap-3 cursor-pointer";
+            } else {
+                startBtn.disabled = true;
+                startBtn.className = "w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-gray-500 font-semibold text-base transition flex items-center justify-center gap-3 cursor-not-allowed";
+            }
+        }
+
+        // Start Morning Review Process
+        function startMorningReview() {
+            if (objectives.length === 0) return;
+            activeView = 'morning';
+            currentMorningIndex = 0;
+            saveState();
+            updateUI();
+            renderMorningCard();
+        }
+
+        // Card Flip Utility
+        function flipCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.toggle('rotate-y-180');
+            }
+        }
+
+        // Render Current Morning Flashcard
+        function renderMorningCard() {
+            const obj = objectives[currentMorningIndex];
+            if (!obj) return;
+
+            // Reset card rotation
+            const card = document.getElementById('morningCard');
+            if (card) card.classList.remove('rotate-y-180');
+
+            document.getElementById('morningCardIndex').textContent = `${currentMorningIndex + 1} of ${objectives.length}`;
+            document.getElementById('morningCardTitle').textContent = obj.title;
+
+            const badge = document.getElementById('morningCardTypeBadge');
+            const details = document.getElementById('morningCardDetails');
+            const prompt = document.getElementById('morningCardPrompt');
+
+            if (obj.type === 'number') {
+                badge.textContent = 'Numeric Target';
+                details.textContent = `Target Goal: ${obj.targetNumber} ${obj.unit}`;
+                prompt.textContent = `How will achieving ${obj.targetNumber} ${obj.unit} fuel your hard work today?`;
+            } else if (obj.type === 'boolean') {
+                badge.textContent = 'Yes / No Goal';
+                details.textContent = 'Commit to completing this objective today.';
+                prompt.textContent = 'Visualize yourself executing and checking off this task.';
+            } else {
+                badge.textContent = 'Meaningful Life Goal';
+                details.textContent = 'High-impact personal or hard work objective.';
+                prompt.textContent = 'Why is this objective vital for your long-term fulfillment?';
+            }
+
+            // Render Navigation Dots
+            const dotsContainer = document.getElementById('morningDots');
+            dotsContainer.innerHTML = objectives.map((_, i) => `
+                <div class="w-2 h-2 rounded-full transition-all ${i === currentMorningIndex ? 'w-6 bg-gemini-cyan' : 'bg-white/20'}"></div>
+            `).join('');
+
+            // Update Buttons
+            document.getElementById('prevMorningBtn').disabled = currentMorningIndex === 0;
+            document.getElementById('nextMorningBtn').disabled = currentMorningIndex === objectives.length - 1;
+
+            lucide.createIcons();
+        }
+
+        function navigateMorningCard(step) {
+            currentMorningIndex = Math.max(0, Math.min(objectives.length - 1, currentMorningIndex + step));
+            renderMorningCard();
+        }
+
+        // Finish Morning Review and Start 12-Hour Timer
+        function finishMorningReview() {
+            dayStartTime = Date.now();
+            activeView = 'setup'; // Remains in active timer day state
+            saveState();
+            startTimer();
+            updateUI();
+        }
+
+        // Timer Logic
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+
+            updateTimerDisplay();
+            timerInterval = setInterval(updateTimerDisplay, 1000);
+        }
+
+        function updateTimerDisplay() {
+            if (!dayStartTime) return;
+
+            const now = Date.now();
+            const elapsed = now - dayStartTime;
+            const remaining = TWELVE_HOURS_MS - elapsed;
+
+            const timerEl = document.getElementById('countdownTimer');
+            const startTimeText = document.getElementById('startTimeText');
+
+            const startDate = new Date(dayStartTime);
+            startTimeText.textContent = `Started at: ${startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+            if (remaining <= 0) {
+                timerEl.textContent = "00:00:00";
+                timerEl.classList.add('text-gemini-cyan');
+                triggerEveningNotification();
+            } else {
+                const hours = Math.floor(remaining / (1000 * 60 * 60));
+                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+                timerEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }
+        }
+
+        // Trigger Evening Check-in
+        function forceEveningMode() {
+            activeView = 'evening';
+            currentEveningIndex = 0;
+            saveState();
+            updateUI();
+            renderEveningCard();
+        }
+
+        // Render Current Evening Flashcard
+        function renderEveningCard() {
+            const obj = objectives[currentEveningIndex];
+            if (!obj) return;
+
+            document.getElementById('eveningCardIndex').textContent = `${currentEveningIndex + 1} of ${objectives.length}`;
+            document.getElementById('eveningCardTitle').textContent = obj.title;
+
+            const badge = document.getElementById('eveningCardTypeBadge');
+            const desc = document.getElementById('eveningCardTargetDesc');
+            const container = document.getElementById('eveningInputContainer');
+
+            if (obj.type === 'number') {
+                badge.textContent = 'Numeric Goal Check';
+                desc.textContent = `Target set: ${obj.targetNumber} ${obj.unit}`;
+
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <label class="block text-xs text-gray-300">How many did you complete today?</label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="eveningNumberInput" value="${obj.loggedNumber || 0}" min="0" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/20 text-xl font-bold text-gemini-cyan focus:outline-none focus:border-gemini-blue">
+                            <span class="text-sm text-gray-400 font-medium">${escapeHtml(obj.unit)}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="eveningNumCheck" ${obj.completed ? 'checked' : ''} class="w-4 h-4 accent-purple-500 rounded">
+                            <label for="eveningNumCheck" class="text-xs text-gray-300">Mark target as complete</label>
+                        </div>
+                    </div>
+                `;
+            } else if (obj.type === 'boolean') {
+                badge.textContent = 'Yes / No Check';
+                desc.textContent = 'Did you accomplish this objective today?';
+
+                container.innerHTML = `
+                    <div class="grid grid-cols-2 gap-4 py-4">
+                        <button type="button" id="btnYes" onclick="selectBooleanResponse(true)" class="p-4 rounded-xl border flex flex-col items-center gap-2 transition ${obj.completed ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300' : 'bg-black/30 border-white/10 text-gray-400 hover:border-white/30'}">
+                            <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+                            <span class="font-bold text-sm">YES</span>
+                        </button>
+                        <button type="button" id="btnNo" onclick="selectBooleanResponse(false)" class="p-4 rounded-xl border flex flex-col items-center gap-2 transition ${!obj.completed ? 'bg-red-500/20 border-red-500 text-red-300' : 'bg-black/30 border-white/10 text-gray-400 hover:border-white/30'}">
+                            <i data-lucide="x-circle" class="w-8 h-8"></i>
+                            <span class="font-bold text-sm">NO</span>
+                        </button>
+                    </div>
+                `;
+            } else if (obj.type === 'life') {
+                badge.textContent = 'Meaningful Life Goal Check';
+                desc.textContent = 'Mark completion status AND rate your execution quality (1-10)';
+
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-3">
+                            <button type="button" id="btnYes" onclick="selectBooleanResponse(true)" class="flex-1 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition ${obj.completed ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300' : 'bg-black/30 border-white/10 text-gray-400'}">
+                                <i data-lucide="check" class="w-4 h-4"></i> Achieved
+                            </button>
+                            <button type="button" id="btnNo" onclick="selectBooleanResponse(false)" class="flex-1 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition ${!obj.completed ? 'bg-red-500/20 border-red-500 text-red-300' : 'bg-black/30 border-white/10 text-gray-400'}">
+                                <i data-lucide="x" class="w-4 h-4"></i> Missed
+                            </button>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs text-gray-300">Satisfaction Scale (1 - 10):</label>
+                                <span id="ratingValDisplay" class="font-bold text-sm text-gemini-cyan">${obj.ratingScore || 5} / 10</span>
+                            </div>
+                            <input type="range" id="lifeRatingSlider" min="1" max="10" value="${obj.ratingScore || 5}" oninput="updateRatingDisplay(this.value)" class="w-full">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>1 (Low Effort)</span>
+                                <span>5 (Solid Effort)</span>
+                                <span>10 (Peak Work)</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('prevEveningBtn').disabled = currentEveningIndex === 0;
+            document.getElementById('nextEveningBtn').textContent = (currentEveningIndex === objectives.length - 1) ? 'Finish Day Review' : 'Save & Next';
+
+            lucide.createIcons();
+        }
+
+        function selectBooleanResponse(status) {
+            objectives[currentEveningIndex].completed = status;
+            renderEveningCard();
+        }
+
+        function updateRatingDisplay(val) {
+            document.getElementById('ratingValDisplay').textContent = `${val} / 10`;
+            objectives[currentEveningIndex].ratingScore = parseInt(val);
+        }
+
+        // Save Current Evening Card Data and Progress
+        function saveEveningCardAndNext() {
+            const obj = objectives[currentEveningIndex];
+
+            if (obj.type === 'number') {
+                const numInput = document.getElementById('eveningNumberInput');
+                const checkInput = document.getElementById('eveningNumCheck');
+                if (numInput) obj.loggedNumber = parseInt(numInput.value) || 0;
+                if (checkInput) obj.completed = checkInput.checked || (obj.loggedNumber >= obj.targetNumber);
+            } else if (obj.type === 'life') {
+                const slider = document.getElementById('lifeRatingSlider');
+                if (slider) obj.ratingScore = parseInt(slider.value);
+            }
+
+            saveState();
+
+            if (currentEveningIndex < objectives.length - 1) {
+                currentEveningIndex++;
+                renderEveningCard();
+            } else {
+                // All cards reviewed!
+                activeView = 'summary';
+                saveState();
+                updateUI();
+                renderSummaryView();
+            }
+        }
+
+        function navigateEveningCard(step) {
+            currentEveningIndex = Math.max(0, Math.min(objectives.length - 1, currentEveningIndex + step));
+            renderEveningCard();
+        }
+
+        // Render Final Summary View
+        function renderSummaryView() {
+            const total = objectives.length;
+            const completed = objectives.filter(o => o.completed).length;
+
+            document.getElementById('summaryTotal').textContent = total;
+            document.getElementById('summaryCompleted').textContent = `${completed} (${Math.round((completed / total) * 100)}%)`;
+
+            const listEl = document.getElementById('summaryList');
+            listEl.innerHTML = objectives.map(obj => {
+                let detailText = '';
+                if (obj.type === 'number') {
+                    detailText = `Logged: ${obj.loggedNumber}/${obj.targetNumber} ${obj.unit}`;
+                } else if (obj.type === 'boolean') {
+                    detailText = obj.completed ? 'Status: Accomplished' : 'Status: Not Achieved';
+                } else {
+                    detailText = `Rating: ${obj.ratingScore || 5}/10 ${obj.completed ? '(Achieved)' : ''}`;
+                }
+
+                return `
+                    <div class="p-3 rounded-xl bg-black/30 border border-white/10 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs ${obj.completed ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}">
+                                <i data-lucide="${obj.completed ? 'check' : 'x'}" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-semibold text-white">${escapeHtml(obj.title)}</div>
+                                <div class="text-[10px] text-gray-400">${detailText}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // Reset Day State
+        function resetDayState() {
+            if (confirm("Start a new day? This will reset active timers and current objectives.")) {
+                objectives = [];
+                dayStartTime = null;
+                activeView = 'setup';
+                if (timerInterval) clearInterval(timerInterval);
+                saveState();
+                renderObjectivesList();
+                updateStartButtonState();
+                updateUI();
+            }
+        }
+
+        // Universal UI Switcher
+        function updateUI() {
+            const setupView = document.getElementById('setupView');
+            const morningView = document.getElementById('morningView');
+            const eveningView = document.getElementById('eveningView');
+            const summaryView = document.getElementById('summaryView');
+            const statusHeader = document.getElementById('statusHeader');
+
+            // Hide all views
+            setupView.classList.add('hidden');
+            morningView.classList.add('hidden');
+            eveningView.classList.add('hidden');
+            summaryView.classList.add('hidden');
+
+            if (dayStartTime && activeView === 'setup') {
+                statusHeader.classList.remove('hidden');
+            } else {
+                statusHeader.classList.add('hidden');
+            }
+
+            if (activeView === 'setup') {
+                setupView.classList.remove('hidden');
+                renderObjectivesList();
+                updateStartButtonState();
+            } else if (activeView === 'morning') {
+                morningView.classList.remove('hidden');
+            } else if (activeView === 'evening') {
+                eveningView.classList.remove('hidden');
+            } else if (activeView === 'summary') {
+                summaryView.classList.remove('hidden');
+            }
+        }
+
+        // Web Notifications API
+        function checkNotificationPermission() {
+            if ('Notification' in window) {
+                if (Notification.permission === 'granted') {
+                    notificationPermission = true;
+                    updateNotificationBtnState(true);
+                }
+            }
+        }
+
+        function toggleNotifications() {
+            if (!('Notification' in window)) {
+                alert("This browser does not support web notifications.");
+                return;
+            }
+
+            if (Notification.permission === 'granted') {
+                alert("Notifications are already active for TheSafeHavenOfHardWorkers.");
+            } else {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        notificationPermission = true;
+                        updateNotificationBtnState(true);
+                        new Notification("TheSafeHavenOfHardWorkers", {
+                            body: "Notifications enabled! We'll remind you 12 hours after starting your work day.",
+                            icon: "https://placehold.co/100x100/4285f4/ffffff?text=SafeHaven"
+                        });
+                    }
+                });
+            }
+        }
+
+        function updateNotificationBtnState(enabled) {
+            const btnText = document.getElementById('notifBtnText');
+            if (enabled && btnText) {
+                btnText.textContent = 'Notifications Active';
+            }
+        }
+
+        function triggerEveningNotification() {
+            // Show custom in-app Toast
+            const toast = document.getElementById('notificationToast');
+            toast.classList.remove('translate-y-32');
+
+            // Send System Notification if permitted
+            if (notificationPermission && Notification.permission === 'granted') {
+                new Notification("TheSafeHavenOfHardWorkers - 12 Hour Check-in", {
+                    body: "It's time for your evening objective review flashcards!",
+                    icon: "https://placehold.co/100x100/9b51e0/ffffff?text=Haven"
+                });
+            }
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('notificationToast');
+            toast.classList.add('translate-y-32');
+        }
+
+        // Helper string escape
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
